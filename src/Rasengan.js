@@ -16,7 +16,7 @@ function Rasengan() {
       0.1,
       1000
     );
-    camera.position.set(0, 0, 25);
+    camera.position.set(-10, 10, 15);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true });

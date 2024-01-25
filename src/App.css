@@ -1,11 +1,29 @@
-/* .App {
+.App {
   text-align: center;
   background-color: black;
+  color: lightblue;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.logo{
+  width: 100px;
+  height: auto;
+  pointer-events: none;
+}
+
+.bodyText{
+  font-size: 2em;
+  font-weight: bold;
+  color: lightblue;
+  text-shadow: 2px 2px 4px #faf8f8;
+  position:absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,4 +54,4 @@
   to {
     transform: rotate(360deg);
   }
-} */
+}

@@ -9,7 +9,7 @@ function Header() {
           {/* <Navbar.Brand href="index.html">Shonen Showdown</Navbar.Brand> */}
           {/* Uncomment below if you prefer to use an image logo */}
           <Navbar.Brand href="index.html">
-            <img src="/transparentlogo.png" alt="" className="img-fluid" />
+            <img src="/transparentlogo.png" alt="" className="img-fluid logo" />
           </Navbar.Brand>
           <Navbar
             className="navbar-custom"
