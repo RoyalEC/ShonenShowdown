@@ -2,12 +2,12 @@ import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
 import LandingPage from "./LandingPage.js";
+import Header from "./Header.js";
 
 function App() {
   return (
     <>
       <div className="App">
-        <h1>Shonen Showdown</h1>
         <LandingPage />
       </div>
     </>
