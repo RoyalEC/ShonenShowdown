@@ -103,7 +103,7 @@ function Rasengan() {
     };
   }, []); // Empty dependency array means this effect will only run once
 
-  return <div ref={mountRef} />;
+  return <div ref={mountRef} className="rasengan" />;
 }
 
 export default Rasengan;

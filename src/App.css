@@ -16,6 +16,37 @@
   pointer-events: none;
 }
 
+/* #video-container {
+  position: relative;
+  overflow: hidden;
+} */
+
+#background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+#video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: 2;
+}
+
+.rasengan{
+  position: relative;
+  z-index: 5;
+}
+
 .bodyText{
   font-size: 2em;
   font-weight: bold;
@@ -25,6 +56,7 @@
   top: 50%;
   left: 10%;
   transform: translateY(-50%);
+  z-index: 5;
 }
 
 @media (prefers-reduced-motion: no-preference) {
