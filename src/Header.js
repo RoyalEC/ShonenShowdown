@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function Header() {
   return (
@@ -11,13 +12,11 @@ function Header() {
           <Navbar.Brand href="index.html">
             <img src="/transparentlogo.png" alt="" className="img-fluid logo" />
           </Navbar.Brand>
-          <Navbar
-            className="navbar-custom"
-            bg="body-tertiary"
-            data-bs-theme="dark"
-          >
+          <Navbar className="navbar-custom" bg="" data-bs-theme="dark">
             <Nav className="mr-auto">
-              <Nav.Link href="#about">Get Started</Nav.Link>
+              <Nav.Link href="#about">
+                <Button variant="outline-light">Get Started</Button>
+              </Nav.Link>
             </Nav>
           </Navbar>
         </Container>

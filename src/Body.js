@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 
 function Body() {
   return (
@@ -6,8 +8,14 @@ function Body() {
       <div className="bodyText">
         <h1 className="landText">Shonen Showdown</h1>
         <p></p>
-        <input type="text" placeholder="Enter your Email"></input>
-        <button>Play Now</button>
+        <InputGroup size="lg">
+          <InputGroup.Text id="inputGroup-sizing-lg">Sign-Up</InputGroup.Text>
+          <Form.Control
+            aria-label="Large"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+          <Button variant="outline-light">Play Now</Button>
+        </InputGroup>
       </div>
     </>
   );
