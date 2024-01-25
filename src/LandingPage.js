@@ -8,8 +8,8 @@ function LandingPage() {
     <>
       <Header />
       <div>
-        <h1>Shonen Showdown</h1>
-        <h2>Choose your fighter!</h2>
+        {/* <h1>Shonen Showdown</h1>
+        <h2>Choose your fighter!</h2> */}
       </div>
       <Rasengan />
     </>
