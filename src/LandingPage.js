@@ -3,6 +3,7 @@ import * as THREE from "three";
 import Header from "./Header.js";
 import Rasengan from "./Rasengan.js";
 import Body from "./Body.js";
+import Footer from "./Footer.js";
 import BackgroundVideo from "./BackgroundVideo.js";
 
 function LandingPage() {
@@ -16,6 +17,7 @@ function LandingPage() {
         <h2>Choose your fighter!</h2> */}
       </div>
       <Body />
+      <Footer />
     </>
   );
 }

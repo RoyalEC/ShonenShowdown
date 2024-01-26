@@ -13,8 +13,11 @@ function Header() {
             <img src="/transparentlogo.png" alt="" className="img-fluid logo" />
           </Navbar.Brand>
           <Navbar className="navbar-custom" bg="" data-bs-theme="dark">
+            <Nav.Link href="how-to-play">
+              <Button variant="outline-info">How To Play</Button>
+            </Nav.Link>
             <Nav className="mr-auto">
-              <Nav.Link href="#about">
+              <Nav.Link href="/get-started">
                 <Button variant="outline-light">Get Started</Button>
               </Nav.Link>
             </Nav>
