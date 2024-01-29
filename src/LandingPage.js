@@ -5,6 +5,7 @@ import Rasengan from "./Rasengan.js";
 import Body from "./Body.js";
 import Footer from "./Footer.js";
 import BackgroundVideo from "./BackgroundVideo.js";
+import Phaser from "./Phaser.js";
 
 function LandingPage() {
   return (

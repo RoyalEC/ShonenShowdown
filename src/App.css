@@ -62,12 +62,6 @@
 
 
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -83,12 +77,41 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.get-started{
+  margin: auto;
+  display: flex;
+  height: 100vh;
+  width: 100vh;
+  flex-direction: column;
+}
+
+.create-account{
+  color: lightblue;
+  font-size: 2rem;
+  background-color: black;
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 23%;
+  padding-top: 2em;
+}
+
+
+
+.HowToPlay{
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game{
+  background-color: white;
 }
 

@@ -5,6 +5,9 @@ import LandingPage from "./LandingPage.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GetStarted from "./GetStarted.js";
 import HowToPlay from "./HowToPlay.js";
+import PhaserComponent from "./Phaser.js";
+import CreateAccount from "./CreateAccount.js";
+import FightScene from "./FightScene.js";
 
 function App() {
   return (
@@ -15,8 +18,12 @@ function App() {
             <Route exact path="/" Component={LandingPage} />
             <Route path="/get-started" Component={GetStarted} />
             <Route path="/how-to-play" Component={HowToPlay} />
+            <Route path="/create-account" Component={CreateAccount} />
+            <Route path="/game" Component={PhaserComponent} />
+            <Route path="/fight" Component={FightScene} />
           </Routes>
         </Router>
+        {/* <PhaserComponent /> */}
       </div>
     </>
   );

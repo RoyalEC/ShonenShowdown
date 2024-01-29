@@ -1,27 +1,76 @@
 import { mongoose } from "mongoose";
 import { connect } from "./conn.js";
 
+const bcrypt = require("bcrypt");
+const saltRounds = 10; // or whatever salt rounds you deem appropriate
+
+userSchema.pre("save", function (next) {
+  // Only hash the password if it has been modified (or is new)
+  if (!this.isModified("password")) return next();
+
+  // Generate a salt and hash the password
+  bcrypt.hash(this.password, saltRounds, (err, hash) => {
+    if (err) return next(err);
+    // Override the plaintext password with the hashed one
+    this.password = hash;
+    next();
+  });
+});
+
 async function main() {
   await connect();
+  const mongoose = require("mongoose");
 
-  const userSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-    created_at: Date,
-    cards: [{ cardSchema }],
-  });
-
+  // Card schema
   const cardSchema = new mongoose.Schema({
-    name: String,
-    Universe: String,
+    name: {
+      type: String,
+      required: true,
+    },
+    universe: {
+      type: String,
+      required: true,
+    },
     description: String,
-    image_url: String,
-    rarity: String,
+    imageUrl: {
+      type: String,
+      required: true,
+    },
+    rarity: {
+      type: String,
+      required: true,
+    },
   });
 
+  // User schema
+  const userSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: /.+\@.+\..+/, // Simple regex for email validation
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now, // Automatically set to the current date
+    },
+    cards: [cardSchema], // Embedding card schema
+  });
+
+  // Compile model from schema
   const User = mongoose.model("User", userSchema);
   const Card = mongoose.model("Card", cardSchema);
+
+  module.exports = { User, Card };
 
   const newUser = new User({
     username: "test",
