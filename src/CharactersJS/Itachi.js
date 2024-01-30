@@ -12,7 +12,6 @@ class Itachi {
     scene.load.image("ult_3", "Sprite-Folder/Characters/itachi/ult_3.png");
     scene.load.image("ult_4", "Sprite-Folder/Characters/itachi/ult_4.png");
     scene.load.image("ult_5", "Sprite-Folder/Characters/itachi/ult_5.png");
-    scene.load.image();
     scene.load.image(
       "fireball_110",
       "Sprite-Folder/Characters/itachi/fireball_110.png"
@@ -37,53 +36,70 @@ class Itachi {
       "fireball_160",
       "Sprite-Folder/Characters/itachi/fireball_160.png"
     );
-    scene.load.on("complete", () => {
-      const frames = scene.anims.generateFrameNumbers("ult", {
-        start: 1,
-        end: 5,
-        zeroPad: 1,
-        prefix: "ult_",
-        suffix: ".png",
-      });
-      const frames2 = scene.anims.generateFrameNumbers("fireball", {
-        start: 110,
-        end: 160,
-        zeroPad: 1,
-        prefix: "fireball_",
-        suffix: ".png",
-      });
-    });
+    // scene.load.on("complete", () => {
+    //   const frames = scene.anims.generateFrameNumbers("ult", {
+    //     start: 1,
+    //     end: 5,
+    //     zeroPad: 1,
+    //     prefix: "ult_",
+    //     suffix: ".png",
+    //   });
+    //   const frames2 = scene.anims.generateFrameNumbers("fireball", {
+    //     start: 110,
+    //     end: 160,
+    //     zeroPad: 1,
+    //     prefix: "fireball_",
+    //     suffix: ".png",
+    //   });
+    // });
   }
 
   stance() {}
 
-  run() {
-    this.sprite.anims.play("run", true);
-    this.sprite.setVelocityX(200);
-  }
+  createAnimation() {
+    this.scene.anims.create({
+      key: "ult",
+      frames: [
+        { key: "ult_1" },
+        { key: "ult_2" },
+        { key: "ult_3" },
+        { key: "ult_4" },
+        { key: "ult_5" },
+      ],
+      frameRate: 10,
+      repeat: 0,
+    });
 
-  jump() {
-    this.sprite.anims.play("jump", true);
-    this.sprite.setVelocityY(-300);
-  }
-
-  ultimateAttack() {
-    this.sprite.anims.play("ult", true);
-    this.sprite.on(
-      "animationcomplete",
-      () => {
-        const fireball = this.scene.physics.add.sprite(
-          this.sprite.x,
-          this.sprite.y,
-          "fireball_110"
-        );
-        fireball.anims.play("fireball", true);
-        fireball.setVelocityX(600);
-        fireball.body.setAllowGravity(false);
-      },
-      this
-    );
+    this.scene.anims.create({
+      key: "fireball",
+      frames: [
+        { key: "fireball_110" },
+        { key: "fireball_120" },
+        { key: "fireball_130" },
+        { key: "fireball_140" },
+        { key: "fireball_150" },
+        { key: "fireball_160" },
+      ],
+      frameRate: 10,
+      repeat: 0,
+    });
   }
 }
+
+// ultimateAttack() {
+//   this.sprite.anims.play("ult", true);
+//   this.sprite.on(
+//     "animationcomplete",
+//     () => {
+//       const fireball = this.scene.physics.add.sprite(
+//         this.sprite.x,
+//         this.sprite.y,
+//         "fireball_110"
+//       );
+//       fireball.anims.play("fireball", true);
+//       fireball.setVelocityX(600);
+//       fireball.body.setAllowGravity(false);
+//     },
+//   );
 
 export default Itachi;
