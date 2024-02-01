@@ -115,3 +115,28 @@
   background-color: white;
 }
 
+/* selectFighter.css */
+
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  background-color: #202020; /* Or any background color you prefer */
+}
+
+.phaser-text {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.phaser-sprite {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.phaser-sprite:hover {
+  transform: scale(1.1);
+}

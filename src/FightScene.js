@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useLayoutEffect } from "react";
 import Phaser from "phaser";
 import Gojo from "./CharactersJS/Gojo.js";
 import Shoto from "./CharactersJS/Shoto.js";
+import Itachi from "./CharactersJS/Itachi.js";
 
 function FightScene() {
   const gameRef = useRef(null);
@@ -20,6 +21,7 @@ function FightScene() {
       preload() {
         Gojo.preload(this);
         Shoto.preload(this);
+        Itachi.preload(this);
       }
 
       create() {
@@ -32,6 +34,10 @@ function FightScene() {
         this.Shoto.sprite.setPosition(200, 200);
         this.Shoto.sprite.body.setAllowGravity(false);
 
+        this.Itachi = new Itachi(this, "ult_1");
+        this.Itachi.sprite.setPosition(300, 300);
+        this.Itachi.sprite.body.setAllowGravity(false);
+
         // Set world bounds
         this.physics.world.setBounds(
           0,
@@ -41,12 +47,15 @@ function FightScene() {
         );
         this.Gojo.sprite.setCollideWorldBounds(true);
         this.Shoto.sprite.setCollideWorldBounds(true);
+        this.Itachi.sprite.setCollideWorldBounds(true);
       }
       update() {
         this.Gojo.ultimateAttack();
         this.Gojo.update();
         this.Shoto.stance();
         this.Shoto.update();
+        // this.Itachi.ultimateAttack();
+        // this.Itachi.update();
       }
     }
 

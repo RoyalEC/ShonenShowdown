@@ -3,7 +3,7 @@ import Phaser from "phaser";
 class Itachi {
   constructor(scene, sprite) {
     this.scene = scene;
-    this.sprite = sprite;
+    this.sprite = this.scene.physics.add.sprite(300, 300, "ult_1");
   }
 
   static preload(scene) {
@@ -56,7 +56,7 @@ class Itachi {
 
   stance() {}
 
-  createAnimation() {
+  ultimateAttack() {
     this.scene.anims.create({
       key: "ult",
       frames: [
@@ -83,23 +83,20 @@ class Itachi {
       frameRate: 10,
       repeat: 0,
     });
+    this.sprite.anims.play("ult", true);
+    this.sprite.on("animationcomplete", () => {
+      const fireball = this.scene.physics.add.sprite(
+        this.sprite.x,
+        this.sprite.y,
+        "fireball_110"
+      );
+      fireball.anims.play("fireball", true);
+      fireball.setVelocityX(600);
+      fireball.body.setAllowGravity(false);
+    });
   }
-}
 
-// ultimateAttack() {
-//   this.sprite.anims.play("ult", true);
-//   this.sprite.on(
-//     "animationcomplete",
-//     () => {
-//       const fireball = this.scene.physics.add.sprite(
-//         this.sprite.x,
-//         this.sprite.y,
-//         "fireball_110"
-//       );
-//       fireball.anims.play("fireball", true);
-//       fireball.setVelocityX(600);
-//       fireball.body.setAllowGravity(false);
-//     },
-//   );
+  update() {}
+}
 
 export default Itachi;

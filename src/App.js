@@ -8,6 +8,7 @@ import HowToPlay from "./HowToPlay.js";
 import PhaserComponent from "./Phaser.js";
 import CreateAccount from "./CreateAccount.js";
 import FightScene from "./FightScene.js";
+import SelectYourFighter from "./SelectYourFighter.js";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/create-account" Component={CreateAccount} />
             <Route path="/game" Component={PhaserComponent} />
             <Route path="/fight" Component={FightScene} />
+            <Route path="/select-fighter" Component={SelectYourFighter} />
           </Routes>
         </Router>
         {/* <PhaserComponent /> */}
