@@ -41,7 +41,7 @@ function SelectYourFighter() {
       }
 
       selectFighter(fighter) {
-        this.registry.set("fighter", fighter);
+        this.registry.set("fighter", { fighter: fighter });
         this.scene.start("FightScene");
       }
     }

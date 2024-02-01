@@ -3,6 +3,7 @@ import Phaser from "phaser";
 import Gojo from "./CharactersJS/Gojo.js";
 import Shoto from "./CharactersJS/Shoto.js";
 import Itachi from "./CharactersJS/Itachi.js";
+import PixelMap from "./PixelMap.js";
 
 function FightScene() {
   const gameRef = useRef(null);
@@ -18,7 +19,12 @@ function FightScene() {
         super({ key: "FightScene" });
       }
 
+      init(data) {
+        this.selectedFighter = data.fighter;
+      }
+
       preload() {
+        PixelMap.preload(this);
         Gojo.preload(this);
         Shoto.preload(this);
         Itachi.preload(this);
@@ -26,16 +32,30 @@ function FightScene() {
 
       create() {
         this.cameras.main.setBackgroundColor("#FFFFFF");
-        this.Gojo = new Gojo(this, "gojoStance_0");
-        this.Gojo.sprite.setPosition(100, 100);
+
+        this.pixelMap = new PixelMap(this);
+        this.Gojo = new Gojo(this, 100, 100);
+        this.Gojo.sprite.setPosition(
+          100,
+          this.scale.height - this.Gojo.sprite.displayHeight / 2
+        );
+        this.Gojo.sprite.setScale(3);
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.add.existing(this.Gojo);
         this.Gojo.sprite.body.setAllowGravity(false);
 
         this.Shoto = new Shoto(this, "shotoStance_0");
-        this.Shoto.sprite.setPosition(200, 200);
+        this.Shoto.sprite.setPosition(
+          100,
+          this.scale.height - this.Shoto.sprite.displayHeight / 2
+        );
+        this.add.existing(this.Shoto);
+        this.Shoto.sprite.setScale(4);
         this.Shoto.sprite.body.setAllowGravity(false);
 
         this.Itachi = new Itachi(this, "ult_1");
         this.Itachi.sprite.setPosition(300, 300);
+        this.Itachi.sprite.setScale(3);
         this.Itachi.sprite.body.setAllowGravity(false);
 
         // Set world bounds
@@ -49,11 +69,16 @@ function FightScene() {
         this.Shoto.sprite.setCollideWorldBounds(true);
         this.Itachi.sprite.setCollideWorldBounds(true);
       }
-      update() {
-        this.Gojo.ultimateAttack();
-        this.Gojo.update();
-        this.Shoto.stance();
-        this.Shoto.update();
+      update(cursors) {
+        if (this.Gojo) {
+          this.Gojo.update(this.cursors);
+        }
+        if (this.Shoto) {
+          this.Shoto.update(this.cursors);
+        }
+
+        // this.Shoto.stance();
+        // this.Shoto.update();
         // this.Itachi.ultimateAttack();
         // this.Itachi.update();
       }
@@ -61,8 +86,12 @@ function FightScene() {
 
     gameRef.current = new Phaser.Game({
       type: Phaser.AUTO,
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+      },
       width: 1200,
-      height: 1000,
+      height: 1200,
       backgroundColor: "white",
       physics: {
         default: "arcade",
@@ -80,12 +109,11 @@ function FightScene() {
     };
   }, []);
 
-  return (
-    <div className="game">
-      <h1>Shonen Showdown</h1>
-      <h2>Choose your fighter!</h2>
-    </div>
-  );
+  // return (
+  //   // <div className="game">
+
+  //   // </div>
+  // );
 }
 
 export default FightScene;

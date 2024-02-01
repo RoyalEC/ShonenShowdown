@@ -5,6 +5,7 @@ class Shoto {
   constructor(scene, sprite) {
     this.scene = scene;
     this.sprite = this.scene.physics.add.sprite(200, 200, "shotoStance_0");
+    this.createAnimation();
   }
 
   loadShotoStanceImages() {
@@ -71,7 +72,7 @@ class Shoto {
     );
   }
 
-  stance() {
+  createAnimation() {
     this.scene.anims.create({
       key: "stance",
       frames: [
@@ -84,10 +85,6 @@ class Shoto {
       frameRate: 10,
       repeat: -1,
     });
-    this.sprite.anims.play("stance", true);
-  }
-
-  run() {
     this.scene.anims.create({
       key: "run",
       frames: [
@@ -103,10 +100,35 @@ class Shoto {
       frameRate: 10,
       repeat: -1,
     });
+  }
+
+  run() {
     this.sprite.anims.play("run", true);
   }
 
-  update() {}
+  stance() {
+    this.sprite.anims.play("stance", true);
+  }
+
+  update(cursors) {
+    if (cursors.left.isDown) {
+      this.run();
+      this.sprite.x -= 5;
+      this.sprite.flipX = true; // Sprite faces left
+    } else if (cursors.right.isDown) {
+      this.run();
+      this.sprite.x += 5;
+      this.sprite.flipX = false; // Sprite faces right (default)
+    } else {
+      this.stance(); // Play idle animation when not moving
+    }
+
+    // if (cursors.up.isDown) {
+    //   this.jump();
+    // } else if (cursors.down.isDown) {
+    //   this.ultimateAttack();
+    // }
+  }
 }
 
 export default Shoto;
