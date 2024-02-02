@@ -2,21 +2,13 @@ import React from "react";
 import phaser from "phaser";
 
 class Shoto {
-  constructor(scene, sprite) {
+  constructor(scene, cursors) {
     this.scene = scene;
+    this.cursors = cursors;
     this.sprite = this.scene.physics.add.sprite(200, 200, "shotoStance_0");
     this.createAnimation();
   }
 
-  loadShotoStanceImages() {
-    for (let i = 0; i < 3; i++) {
-      this.scene.load.image(
-        `shotoStance_${i}`,
-        `Sprite-Folder/Characters/Shoto/shotoStance_${i}.png`
-      );
-    }
-    this.sprite = this.scene.physics.add.sprite(100, 100, "shotoStance_0");
-  }
   static preload(scene) {
     scene.load.image(
       "shotoStance_0",

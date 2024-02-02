@@ -2,21 +2,11 @@ import react, { useEffect } from "react";
 import phaser from "phaser";
 
 class Gojo {
-  constructor(scene, sprite, cursors) {
+  constructor(scene, cursors) {
     this.scene = scene;
     this.cursors = cursors;
-    this.loadGojoStanceImages();
+    this.sprite = this.scene.physics.add.sprite(0, 0, "gojoStance_0");
     this.createAnimation();
-  }
-
-  loadGojoStanceImages() {
-    for (let i = 0; i < 3; i++) {
-      this.scene.load.image(
-        `gojoStance_${i}`,
-        `Sprite-Folder/Characters/Gojo/gojoStance_${i}.png`
-      );
-    }
-    this.sprite = this.scene.physics.add.sprite(100, 100, "gojoStance_0");
   }
   static preload(scene) {
     scene.load.image(

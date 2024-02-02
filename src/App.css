@@ -112,7 +112,7 @@
 }
 
 .game{
-  background-color: white;
+  background-color: black;
 }
 
 /* selectFighter.css */
@@ -123,8 +123,8 @@
   align-items: center;
   flex-direction: column;
   
-  background-color: #202020; /* Or any background color you prefer */
-}
+  background-color: #202020; 
+} 
 
 .phaser-text {
   color: white;

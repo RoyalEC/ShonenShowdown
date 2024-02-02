@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 class Itachi {
-  constructor(scene, sprite) {
+  constructor(scene) {
     this.scene = scene;
     this.sprite = this.scene.physics.add.sprite(300, 300, "ult_1");
   }
