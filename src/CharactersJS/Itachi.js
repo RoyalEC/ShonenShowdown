@@ -4,6 +4,8 @@ class Itachi {
   constructor(scene) {
     this.scene = scene;
     this.sprite = this.scene.physics.add.sprite(300, 300, "ult_1");
+    this.sprite.setScale(2);
+    this.sprite.setCollideWorldBounds(true);
   }
 
   static preload(scene) {

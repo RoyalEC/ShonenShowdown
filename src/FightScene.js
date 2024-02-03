@@ -8,6 +8,7 @@ import PixelMap from "./PixelMap.js";
 export class FightScene extends Phaser.Scene {
   constructor() {
     super({ key: "FightScene" });
+    this.activeCharacter = null;
   }
 
   init(data) {
@@ -20,102 +21,61 @@ export class FightScene extends Phaser.Scene {
     Shoto.preload(this);
     Itachi.preload(this);
   }
-  create() {
+  create(data) {
     this.cameras.main.setBackgroundColor("#FFFFFF");
+    this.PixelMap = new PixelMap(this);
+    this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.pixelMap = new PixelMap(this);
-    const selectedFighterKey = this.selectedFighter; // This should be 'Gojo', 'Shoto', or 'Itachi'
-    let fighter;
     switch (this.selectedFighter) {
       case "Gojo":
-        fighter = new Gojo(this);
+        this.activeCharacter = new Gojo(this, this.cursors);
         break;
       case "Shoto":
-        fighter = new Shoto(this /* additional params */);
+        this.activeCharacter = new Shoto(this, this.cursors);
         break;
       case "Itachi":
-        fighter = new Itachi(this /* additional params */);
+        this.activeCharacter = new Itachi(this, this.cursors);
         break;
       default:
         console.error("Unknown fighter selected");
-        return; // Exit if no known fighter is selected
+        return;
     }
 
-    if (!fighter) {
-      console.error("Character not properly initialized");
-      return; // Early return to prevent trying to access properties on undefined
-    }
-
-    console.log("Selected fighter:", this.selectedFighter);
-    console.log("Fighter object:", fighter);
-    console.log("Fighter sprite:", fighter ? fighter.sprite : null);
-
-    // Proceed with setting up the fighter's sprite
-    fighter.sprite.setPosition(
-      100,
-      this.scale.height - fighter.sprite.displayHeight / 2
-    );
-    fighter.sprite.setScale(3);
-    this.cursors = this.input.keyboard.createCursorKeys();
-    // this.add.existing(fighter.sprite);
-    fighter.sprite.body.setAllowGravity(false);
-
-    // Set world bounds
-    this.physics.world.setBounds(
-      0,
-      0,
-      this.sys.game.config.width,
-      this.sys.game.config.height
-    );
-    fighter.sprite.setCollideWorldBounds(true);
-
-    // this.Gojo = new Gojo(this, 100, 100);
-    // this.Gojo.sprite.setPosition(
-    //   100,
-    //   this.scale.height - this.Gojo.sprite.displayHeight / 2
-    // );
-    // this.Gojo.sprite.setScale(3);
-    // this.cursors = this.input.keyboard.createCursorKeys();
-    // this.add.existing(this.Gojo);
-    // this.Gojo.sprite.body.setAllowGravity(false);
-
-    // this.Shoto = new Shoto(this, "shotoStance_0");
-    // this.Shoto.sprite.setPosition(
-    //   100,
-    //   this.scale.height - this.Shoto.sprite.displayHeight / 2
-    // );
-    // this.add.existing(this.Shoto);
-    // this.Shoto.sprite.setScale(4);
-    // this.Shoto.sprite.body.setAllowGravity(false);
-
-    // this.Itachi = new Itachi(this, "ult_1");
-    // this.Itachi.sprite.setPosition(300, 300);
-    // this.Itachi.sprite.setScale(3);
-    // this.Itachi.sprite.body.setAllowGravity(false);
-
-    // Set world bounds
-    // this.physics.world.setBounds(
-    //   0,
-    //   0,
-    //   this.sys.game.config.width,
-    //   this.sys.game.config.height
-    // );
-    // this.Gojo.sprite.setCollideWorldBounds(true);
-    // this.Shoto.sprite.setCollideWorldBounds(true);
-    // this.Itachi.sprite.setCollideWorldBounds(true);
+    // Assuming fighter class correctly initializes its sprite
+    // Correct place to initialize cursors
+    //   setupCharacterSprite(sprite) {
+    //     sprite.setPosition(100, this.scale.height - sprite.displayHeight / 2);
+    //     sprite.setScale(3);
+    //     sprite.setCollideWorldBounds(true);
+    //     // Additional setup as needed
+    // }
   }
 
-  update(cursors) {
-    if (this.Gojo) {
-      this.Gojo.update(this.cursors);
+  update() {
+    if (this.activeCharacter) {
+      this.activeCharacter.update();
     }
-    if (this.Shoto) {
-      this.Shoto.update(this.cursors);
-    }
-    // this.Shoto.stance();
-    // this.Shoto.update();
-    // this.Itachi.ultimateAttack();
-    // this.Itachi.update();
+    // if (this.currentFighter && this.cursors) {
+    //   const { left, right, up, down } = this.cursors;
+    //   const velocity = 200;
+
+    //   // Reset velocity
+    //   this.currentFighter.sprite.setVelocity(0);
+
+    //   // Check for left/right input
+    //   if (left.isDown) {
+    //     this.currentFighter.sprite.setVelocityX(-velocity);
+    //   } else if (right.isDown) {
+    //     this.currentFighter.sprite.setVelocityX(velocity);
+    //   }
+
+    //   // Check for up/down input
+    //   if (up.isDown) {
+    //     this.currentFighter.sprite.setVelocityY(-velocity);
+    //   } else if (down.isDown) {
+    //     this.currentFighter.sprite.setVelocityY(velocity);
+    //   }
+    // }
   }
 }
 
@@ -135,7 +95,7 @@ export function NewFightScene() {
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
       width: 1200,
-      height: 1200,
+      height: 600,
       backgroundColor: "white",
       physics: {
         default: "arcade",

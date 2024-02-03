@@ -6,6 +6,8 @@ class Gojo {
     this.scene = scene;
     this.cursors = cursors;
     this.sprite = this.scene.physics.add.sprite(0, 0, "gojoStance_0");
+    this.sprite.setCollideWorldBounds(true);
+    this.sprite.setScale(2);
     this.createAnimation();
   }
   static preload(scene) {
@@ -210,26 +212,28 @@ class Gojo {
     this.sprite.anims.play("DomainExpansion", true);
   }
 
-  update(cursors) {
-    console.log(cursors.left.isDown); // Check if the left key is being detected
-    console.log(this.sprite.x); // Check the current x position of the sprite
-
-    if (cursors.left.isDown) {
-      this.walk();
-      this.sprite.x -= 5;
-      this.sprite.flipX = true; // Sprite faces left
-    } else if (cursors.right.isDown) {
-      this.walk();
-      this.sprite.x += 5;
-      this.sprite.flipX = false; // Sprite faces right (default)
+  update() {
+    if (this.cursors.left.isDown) {
+      this.sprite.setVelocityX(-160);
+      this.sprite.anims.play("Walk", true);
+      this.sprite.flipX = true; // Sprite faces left when moving left
+    } else if (this.cursors.right.isDown) {
+      this.sprite.setVelocityX(160);
+      this.sprite.anims.play("Walk", true);
+      this.sprite.flipX = false; // Sprite faces right (default direction)
     } else {
-      this.stance(); // Play idle animation when not moving
+      this.sprite.setVelocityX(0);
+      this.sprite.anims.play("Stance", true); // Play idle animation when not moving horizontally
     }
 
-    if (cursors.up.isDown) {
-      this.jump();
-    } else if (cursors.down.isDown) {
-      this.ultimateAttack();
+    if (this.cursors.up.isDown && this.sprite.body.touching.down) {
+      this.sprite.setVelocityY(-330); // Add a jump condition
+      this.sprite.anims.play("Jump", true);
+    }
+
+    // Check if the character is touching the ground before allowing another jump
+    if (this.sprite.body.touching.down) {
+      this.sprite.anims.play("Stance", true);
     }
   }
 }

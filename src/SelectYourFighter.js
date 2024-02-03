@@ -19,31 +19,15 @@ class SelectFighterScene extends Phaser.Scene {
     this.load.image("Gojo", "Sprite-Folder/Characters/Gojo/mugshot.png");
     this.load.image("Shoto", "Sprite-Folder/Characters/Shoto/mugshot.png");
     this.load.image("itachi", "Sprite-Folder/Characters/Itachi/mugshot.png");
+    Gojo.preload(this);
+    Shoto.preload(this);
+    Itachi.preload(this);
   }
 
   //   startFightScene(fighter) {
   //     this.registry.set("Gojo", fighter);
   //     this.scene.start("FightScene");
   //   }
-
-  create() {
-    this.add.text(20, 20, "Select Your Fighter");
-
-    const gojoImage = this.add.image(100, 100, "Gojo").setInteractive();
-    gojoImage.on("pointerdown", () => {
-      this.startFightScene("Gojo");
-    });
-
-    const shotoImage = this.add.image(200, 200, "Shoto").setInteractive();
-    shotoImage.on("pointerdown", () => {
-      this.startFightScene("Shoto");
-    });
-
-    const itachiImage = this.add.image(300, 300, "itachi").setInteractive();
-    itachiImage.on("pointerdown", () => {
-      this.startFightScene("Itachi");
-    });
-  }
 
   startFightScene(fighterKey) {
     // Start FightScene and pass the selected fighter's key
@@ -53,6 +37,25 @@ class SelectFighterScene extends Phaser.Scene {
   selectFighter(fighter) {
     this.registry.set("fighter", { fighter: fighter });
     this.scene.start("FightScene");
+  }
+
+  create() {
+    this.add.text(20, 20, "Select Your Fighter");
+
+    const gojoImage = this.add.image(100, 100, "Gojo").setInteractive();
+    gojoImage.on("pointerdown", () => {
+      this.scene.start("FightScene", { fighter: "Gojo" });
+    });
+
+    const shotoImage = this.add.image(200, 200, "Shoto").setInteractive();
+    shotoImage.on("pointerdown", () => {
+      this.scene.start("FightScene", { fighter: "Shoto" });
+    });
+
+    const itachiImage = this.add.image(300, 300, "itachi").setInteractive();
+    itachiImage.on("pointerdown", () => {
+      this.scene.start("FightScene", { fighter: "Itachi" });
+    });
   }
 }
 // console.log(fighter);
@@ -65,7 +68,7 @@ function SelectYourFighter() {
     const config = {
       type: Phaser.AUTO,
       width: 1200,
-      height: 1200,
+      height: 600,
       scene: [SelectFighterScene, FightScene],
       physics: {
         default: "arcade",

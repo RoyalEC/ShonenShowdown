@@ -5,7 +5,9 @@ class Shoto {
   constructor(scene, cursors) {
     this.scene = scene;
     this.cursors = cursors;
-    this.sprite = this.scene.physics.add.sprite(200, 200, "shotoStance_0");
+    this.sprite = this.scene.physics.add.sprite(0, 0, "shotoStance_0");
+    this.sprite.setCollideWorldBounds(true);
+    this.sprite.setScale(3);
     this.createAnimation();
   }
 
@@ -103,23 +105,28 @@ class Shoto {
   }
 
   update(cursors) {
-    if (cursors.left.isDown) {
-      this.run();
-      this.sprite.x -= 5;
-      this.sprite.flipX = true; // Sprite faces left
-    } else if (cursors.right.isDown) {
-      this.run();
-      this.sprite.x += 5;
-      this.sprite.flipX = false; // Sprite faces right (default)
+    if (this.cursors.left.isDown) {
+      this.sprite.setVelocityX(-160);
+      this.sprite.anims.play("run", true);
+      this.sprite.flipX = true; // Sprite faces left when moving left
+    } else if (this.cursors.right.isDown) {
+      this.sprite.setVelocityX(160);
+      this.sprite.anims.play("run", true);
+      this.sprite.flipX = false; // Sprite faces right (default direction)
     } else {
-      this.stance(); // Play idle animation when not moving
+      this.sprite.setVelocityX(0);
+      this.sprite.anims.play("stance", true); // Play idle animation when not moving horizontally
     }
 
-    // if (cursors.up.isDown) {
-    //   this.jump();
-    // } else if (cursors.down.isDown) {
-    //   this.ultimateAttack();
-    // }
+    if (this.cursors.up.isDown && this.sprite.body.touching.down) {
+      this.sprite.setVelocityY(-330); // Add a jump condition
+      this.sprite.anims.play("Jump", true);
+    }
+
+    // Check if the character is touching the ground before allowing another jump
+    if (this.sprite.body.touching.down) {
+      this.sprite.anims.play("Stance", true);
+    }
   }
 }
 
