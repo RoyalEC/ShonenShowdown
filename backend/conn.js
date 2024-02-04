@@ -1,14 +1,15 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+require("./localENV.js");
+const mongoose = require("mongoose");
 
-export async function connect() {
+async function connect() {
   try {
-    await mongoose.connect(process.env.ATLAS.URI);
+    await mongoose.connect(process.env.ATLAS_URI);
     console.log("Connected to MongoDB");
   } catch (error) {
     console.log(error.message);
   }
 }
 
-export default connect;
+connect();
+
+module.exports = connect;

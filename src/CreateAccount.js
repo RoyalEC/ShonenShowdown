@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -7,16 +8,59 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
 function CreateAccount() {
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    termsAndConditions: false,
+  });
 
-  const handleSubmit = (event) => {
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
-    }
+    } else {
+      setValidated(true);
 
-    setValidated(true);
+      // Collect form data
+      const user = formData;
+      user.termsAndConditions = user.termsAndConditions === "on" ? true : false;
+      console.log(user);
+
+      try {
+        const response = await fetch("http://localhost:9001/create-account", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        });
+
+        if (!response.ok) {
+          const responseBody = await response.json();
+          console.log(responseBody);
+          throw new Error(`HTTP error! status: ${response.status} `);
+        } else {
+          navigate("/get-started");
+        }
+
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   };
 
   return (
@@ -40,8 +84,11 @@ function CreateAccount() {
             <Form.Control
               required
               type="text"
+              name="firstName"
+              value={formData.firstName || ""}
+              onChange={handleChange}
               placeholder="First name"
-              defaultValue="Mark"
+              // defaultValue=""
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -51,7 +98,9 @@ function CreateAccount() {
               required
               type="text"
               placeholder="Last name"
-              defaultValue="Otto"
+              name="lastName"
+              onChange={handleChange}
+              value={formData.lastName}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -63,6 +112,9 @@ function CreateAccount() {
                 type="text"
                 placeholder="Username"
                 aria-describedby="inputGroupPrepend"
+                name="username"
+                value={formData.username || ""}
+                onChange={handleChange}
                 required
               />
               <Form.Control.Feedback type="invalid">
@@ -72,25 +124,18 @@ function CreateAccount() {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group as={Col} md="6" controlId="validationCustom03">
-            <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="City" required />
+          <Form.Group as={Col} md="30" controlId="validationCustom03">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
             <Form.Control.Feedback type="invalid">
-              Please provide a valid city.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom04">
-            <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="State" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid state.
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom05">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control type="text" placeholder="Zip" required />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid zip.
+              Please create a password.
             </Form.Control.Feedback>
           </Form.Group>
         </Row>
@@ -98,11 +143,16 @@ function CreateAccount() {
           <Form.Check
             required
             label="Agree to terms and conditions"
+            name="termsAndConditions"
+            checked={formData.termsAndConditions}
+            onChange={handleChange}
             feedback="You must agree before submitting."
             feedbackType="invalid"
           />
         </Form.Group>
-        <Button type="submit">Submit form</Button>
+        <Button type="submit" onSubmit={handleSubmit}>
+          Sign Up
+        </Button>
       </Form>
     </>
   );

@@ -1,101 +1,81 @@
-import { mongoose } from "mongoose";
-import { connect } from "./conn.js";
-
+require("./localENV.js");
+const connect = require("./conn.js");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const saltRounds = 10; // or whatever salt rounds you deem appropriate
+const jwt = require("jsonwebtoken");
 
-userSchema.pre("save", function (next) {
-  // Only hash the password if it has been modified (or is new)
-  if (!this.isModified("password")) return next();
-
-  // Generate a salt and hash the password
-  bcrypt.hash(this.password, saltRounds, (err, hash) => {
-    if (err) return next(err);
-    // Override the plaintext password with the hashed one
-    this.password = hash;
-    next();
-  });
+// Define the User schema
+const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  termsAndConditions: {
+    type: Boolean,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  tokens: [{ token: String }],
 });
 
+// Middleware to hash password before saving
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+
+// Method to generate auth token
+userSchema.methods.generateAuthToken = async function () {
+  const token = jwt.sign({ _id: this._id.toString() }, process.env.JWT_SECRET);
+  this.tokens = this.tokens.concat({ token });
+  await this.save();
+  return token;
+};
+
+// Static method to find user by credentials
+userSchema.statics.findByCredentials = async function (username, password) {
+  const user = await this.findOne({ username });
+  if (!user) {
+    throw new Error("Unable to login");
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error("Unable to login");
+  }
+  return user;
+};
+
+// Compile the schema into a model
+const User = mongoose.model("User", userSchema);
+
+// Connect to MongoDB
 async function main() {
   await connect();
-  const mongoose = require("mongoose");
-
-  // Card schema
-  const cardSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
-    },
-    universe: {
-      type: String,
-      required: true,
-    },
-    description: String,
-    imageUrl: {
-      type: String,
-      required: true,
-    },
-    rarity: {
-      type: String,
-      required: true,
-    },
-  });
-
-  // User schema
-  const userSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: /.+\@.+\..+/, // Simple regex for email validation
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now, // Automatically set to the current date
-    },
-    cards: [cardSchema], // Embedding card schema
-  });
-
-  // Compile model from schema
-  const User = mongoose.model("User", userSchema);
-  const Card = mongoose.model("Card", cardSchema);
-
-  module.exports = { User, Card };
-
-  const newUser = new User({
-    username: "test",
-    email: "test@example.com",
-    password: "password",
-  });
-  newUser.save();
-
-  const newCard = new Card({
-    name: "Goku (Kid)",
-    Universe: "Dragon Ball",
-    description: "The main character of Dragon Ball",
-    image_url:
-      "https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.wikia.nocookie.net%2Fvsbattles%2Fimages%2F6%2F6a%2FKid_goku_render_dokkan_battle_by_maxiuchiha22_dccjed9.png%2Frevision%2Flatest%2Fscale-to-width-down%2F400%3Fcb%3D20190816231855&tbnid=1l4u-7AOj13G9M&vet=12ahUKEwjRoMnHuveDAxVVjIkEHfODBKUQMygAegQIARBz..i&imgrefurl=https%3A%2F%2Fvsbattles.fandom.com%2Fwiki%2FSon_Goku_(Dragon_Ball)&docid=StGNhRDCqXd_4M&w=370&h=580&q=goku%20kid&ved=2ahUKEwjRoMnHuveDAxVVjIkEHfODBKUQMygAegQIARBz",
-    rarity: "C Tier",
-  });
-
-  const newCard2 = new Card({
-    name: "Goku (UI)",
-    Universe: "Dragon Ball",
-    description: "The main character of Dragon Ball",
-    image_url:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ebay.com%2Fitm%2F284982622729&psig=AOvVaw0LWbZFqRfnMRmkXsyQ9CiH&ust=1706234662147000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKjKz7m694MDFQAAAAAdAAAAABAE",
-    rarity: "S Tier",
-  });
 }
 
+// Call the main function to connect to the database
 main().catch(console.error);
+
+// Export the model
+module.exports = { User };

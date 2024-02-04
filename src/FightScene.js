@@ -20,11 +20,15 @@ export class FightScene extends Phaser.Scene {
     Gojo.preload(this);
     Shoto.preload(this);
     Itachi.preload(this);
+    this.load.audio("bgm", "Sprite-Folder/Music/cellsong.mp3");
   }
   create(data) {
-    this.cameras.main.setBackgroundColor("#FFFFFF");
+    this.sound.stopByKey("bgm1");
+    this.cameras.main.setBackgroundColor("#black");
     this.PixelMap = new PixelMap(this);
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.bgm = this.sound.add("bgm", { loop: true });
+    this.bgm.play();
 
     switch (this.selectedFighter) {
       case "Gojo":
@@ -40,42 +44,12 @@ export class FightScene extends Phaser.Scene {
         console.error("Unknown fighter selected");
         return;
     }
-
-    // Assuming fighter class correctly initializes its sprite
-    // Correct place to initialize cursors
-    //   setupCharacterSprite(sprite) {
-    //     sprite.setPosition(100, this.scale.height - sprite.displayHeight / 2);
-    //     sprite.setScale(3);
-    //     sprite.setCollideWorldBounds(true);
-    //     // Additional setup as needed
-    // }
   }
 
   update() {
     if (this.activeCharacter) {
       this.activeCharacter.update();
     }
-    // if (this.currentFighter && this.cursors) {
-    //   const { left, right, up, down } = this.cursors;
-    //   const velocity = 200;
-
-    //   // Reset velocity
-    //   this.currentFighter.sprite.setVelocity(0);
-
-    //   // Check for left/right input
-    //   if (left.isDown) {
-    //     this.currentFighter.sprite.setVelocityX(-velocity);
-    //   } else if (right.isDown) {
-    //     this.currentFighter.sprite.setVelocityX(velocity);
-    //   }
-
-    //   // Check for up/down input
-    //   if (up.isDown) {
-    //     this.currentFighter.sprite.setVelocityY(-velocity);
-    //   } else if (down.isDown) {
-    //     this.currentFighter.sprite.setVelocityY(velocity);
-    //   }
-    // }
   }
 }
 
@@ -94,8 +68,8 @@ export function NewFightScene() {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
       },
-      width: 1200,
-      height: 600,
+      width: 1400,
+      height: 700,
       backgroundColor: "white",
       physics: {
         default: "arcade",

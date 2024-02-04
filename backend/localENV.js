@@ -1,2 +1,1 @@
-import dotenv from "dotenv";
-dotenv.config();
+require("dotenv").config({ path: __dirname + "/../.env" });
