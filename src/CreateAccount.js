@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
+import styles from "./CreateAccount.module.css";
 
 function CreateAccount() {
   const navigate = useNavigate();
@@ -65,95 +66,116 @@ function CreateAccount() {
 
   return (
     <>
-      <img
-        src="/transparentlogo.png"
-        alt="Shonen Showdown Logo"
-        className="logo"
-      />
-      <h1>Create Account</h1>
-      <p>Will You Come Out On Top?</p>
-      <Form
-        noValidate
-        validated={validated}
-        onSubmit={handleSubmit}
-        className="create-account"
-      >
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="firstName"
-              value={formData.firstName || ""}
-              onChange={handleChange}
-              placeholder="First name"
-              // defaultValue=""
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom02">
-            <Form.Label>Last name</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="Last name"
-              name="lastName"
-              onChange={handleChange}
-              value={formData.lastName}
-            />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-            <Form.Label>Username</Form.Label>
-            <InputGroup hasValidation>
-              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+      <div className={styles.container}>
+        <img
+          src="/transparentlogo.png"
+          alt="Shonen Showdown Logo"
+          className={styles.logo}
+        />
+        <h1 className={styles.title}>Create Account</h1>
+        <p className={styles.subtitle}>Will You Come Out On Top?</p>
+        <Form
+          noValidate
+          validated={validated}
+          onSubmit={handleSubmit}
+          className={styles.form}
+        >
+          <Row className="mb-3">
+            <Form.Group
+              as={Col}
+              md="4"
+              controlId="validationCustom01"
+              className={styles.inputGroup}
+            >
+              <Form.Label>First name</Form.Label>
               <Form.Control
+                required
                 type="text"
-                placeholder="Username"
-                aria-describedby="inputGroupPrepend"
-                name="username"
-                value={formData.username || ""}
+                name="firstName"
+                value={formData.firstName || ""}
+                onChange={handleChange}
+                placeholder="First name"
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group
+              as={Col}
+              md="4"
+              controlId="validationCustom02"
+              className={styles.inputGroup}
+            >
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Last name"
+                name="lastName"
+                onChange={handleChange}
+                value={formData.lastName || ""}
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group
+              as={Col}
+              md="4"
+              controlId="validationCustomUsername"
+              className={styles.inputGroup}
+            >
+              <Form.Label>Username</Form.Label>
+              <InputGroup hasValidation>
+                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  placeholder="Username"
+                  aria-describedby="inputGroupPrepend"
+                  name="username"
+                  value={formData.username || ""}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please choose a username.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group
+              as={Col}
+              md="6"
+              controlId="validationCustom03"
+              className={styles.inputGroup}
+            >
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={formData.password || ""}
                 onChange={handleChange}
                 required
               />
               <Form.Control.Feedback type="invalid">
-                Please choose a username.
+                Please create a password.
               </Form.Control.Feedback>
-            </InputGroup>
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Col} md="30" controlId="validationCustom03">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
+            </Form.Group>
+          </Row>
+          <Form.Group className={styles.terms}>
+            <Form.Check
               required
+              label="Agree to terms and conditions"
+              name="termsAndConditions"
+              checked={formData.termsAndConditions || false}
+              onChange={handleChange}
+              feedback="You must agree before submitting."
+              feedbackType="invalid"
             />
-            <Form.Control.Feedback type="invalid">
-              Please create a password.
-            </Form.Control.Feedback>
           </Form.Group>
-        </Row>
-        <Form.Group className="mb-3">
-          <Form.Check
-            required
-            label="Agree to terms and conditions"
-            name="termsAndConditions"
-            checked={formData.termsAndConditions}
-            onChange={handleChange}
-            feedback="You must agree before submitting."
-            feedbackType="invalid"
-          />
-        </Form.Group>
-        <Button type="submit" onSubmit={handleSubmit}>
-          Sign Up
-        </Button>
-      </Form>
+          <Button type="submit" className={styles.button}>
+            Sign Up
+          </Button>
+        </Form>
+      </div>
     </>
   );
 }

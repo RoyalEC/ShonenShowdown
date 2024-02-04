@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "./GetStarted.module.css";
 
 function GetStarted() {
   const navigate = useNavigate();
@@ -67,48 +68,43 @@ function GetStarted() {
 
   return (
     <>
-      <div>
+      <div className={styles.getStartedContainer}>
         <h1>{message}</h1>
         <img
           src="/transparentlogo.png"
           alt="Shonen Showdown Logo"
-          className="logo"
-        ></img>
-        <Link to="/get-started">
-          <h1>Login Your Account</h1>
-          <form className="get-started">
-            <label>
-              Username:
-              <input
-                type="text"
-                required
-                name="username"
-                value={formData.username || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={formData.password || ""}
-                required
-                onChange={handleChange}
-              />
-            </label>
-            <button
-              type="submit"
-              value="Log In"
-              id="Login"
-              onClick={handleSubmit}
-            >
-              Log In
-            </button>
-            <Link to="/create-account">
-              Don't have an account? Sign Up Now!
-            </Link>
-          </form>
+          className={styles.logo}
+        />
+        <h1>Login Your Account</h1>
+        <form className={styles.formContainer} onSubmit={handleSubmit}>
+          <label className={styles.formLabel}>
+            Username:
+            <input
+              type="text"
+              required
+              name="username"
+              value={formData.username || ""}
+              onChange={handleChange}
+              className={styles.formInput}
+            />
+          </label>
+          <label className={styles.formLabel}>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={formData.password || ""}
+              required
+              onChange={handleChange}
+              className={styles.formInput}
+            />
+          </label>
+          <button type="submit" id="Login" className={styles.formButton}>
+            Log In
+          </button>
+        </form>
+        <Link to="/create-account" className={styles.signUpLink}>
+          Don't have an account? Sign Up Now!
         </Link>
       </div>
     </>

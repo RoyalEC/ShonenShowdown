@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three-stdlib";
+import styles from "./Rasengan.module.css";
 
 function Rasengan() {
   const mountRef = useRef(null);
@@ -67,8 +68,9 @@ function Rasengan() {
     // Cleanup function
     return () => {
       // Remove the canvas from the DOM
-      mountRef.current.removeChild(renderer.domElement);
-
+      if (mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
       // Go through all children of the scene
       for (let i = scene.children.length - 1; i >= 0; i--) {
         const object = scene.children[i];
@@ -103,7 +105,7 @@ function Rasengan() {
     };
   }, []); // Empty dependency array means this effect will only run once
 
-  return <div ref={mountRef} className="rasengan" />;
+  return <div ref={mountRef} className={styles.rasengan} />;
 }
 
 export default Rasengan;

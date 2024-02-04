@@ -1,0 +1,13 @@
+.rasengan {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  @media (max-width: 768px) {
+    .rasengan {
+      width: 50%;
+      height: auto;
+    }
+  }
+  

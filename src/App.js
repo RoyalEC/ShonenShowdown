@@ -2,7 +2,13 @@
 import React from "react";
 import "./App.css";
 import LandingPage from "./LandingPage.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  ProtectedRoute,
+  Navigate,
+} from "react-router-dom";
 import GetStarted from "./GetStarted.js";
 import HowToPlay from "./HowToPlay.js";
 import PhaserComponent from "./Phaser.js";
@@ -12,6 +18,15 @@ import SelectYourFighter from "./SelectYourFighter.js";
 import GameComponent from "./GameComponent.js";
 
 function App() {
+  const ProtectedRoute = ({ SelectYourFighter }) => {
+    const isAuthenticated = localStorage.getItem("authToken");
+    if (isAuthenticated) {
+      return <Route path="/select-fighter" element={SelectYourFighter} />;
+    } else {
+      return <Navigate to="/get-started" />;
+    }
+  };
+
   return (
     <>
       <div className="App">
@@ -23,7 +38,7 @@ function App() {
             <Route path="/create-account" Component={CreateAccount} />
             <Route path="/game" Component={PhaserComponent} />
             <Route path="/fight" Component={NewFightScene} />
-            <Route path="/select-fighter" Component={SelectYourFighter} />
+            {ProtectedRoute({ component: SelectYourFighter })}
           </Routes>
         </Router>
         {/* <PhaserComponent /> */}

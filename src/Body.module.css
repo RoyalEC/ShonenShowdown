@@ -1,0 +1,37 @@
+.bodyText {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
+    position: absolute;
+    top: 50%;
+    left: 34%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    text-align: center;
+  }
+  
+  .landText {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .bText {
+    margin-bottom: 1rem;
+  }
+  
+  .playNowButton {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    margin-top: 2rem;
+    border: 2px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .playNowButton:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  

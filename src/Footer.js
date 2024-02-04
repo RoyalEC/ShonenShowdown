@@ -1,23 +1,32 @@
 import React from "react";
+import styles from "./Footer.module.css";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
   return (
     <>
-      <footer className="footer"></footer>
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-dark">
-          <li>
-            <a href="/how-to-play">How to Play</a>
-          </li>
-          <li>
-            <a href="/get-started">Get Started</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
-          <p>&copy;{new Date().getFullYear()}</p>
+      <footer className={styles.footer}>
+        <nav className={styles.navbar}>
+          <ul className={styles.navItems}>
+            <li className={styles.navItem}>
+              <a href="/how-to-play" className={styles.navLink}>
+                How to Play
+              </a>
+            </li>
+            <li className={styles.navItem}>
+              <a href="/get-started" className={styles.navLink}>
+                Get Started
+              </a>
+            </li>
+            <li className={styles.navItem}>
+              <a href="/contact" className={styles.navLink}>
+                Contact
+              </a>
+            </li>
+          </ul>
+          <p className={styles.copyRight}>&copy;{currentYear}</p>
         </nav>
-      </div>
+      </footer>
     </>
   );
 }

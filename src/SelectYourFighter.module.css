@@ -1,0 +1,48 @@
+/* SelectFighterScene.module.css */
+.gameContainer canvas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    /* background: url('/animemix.mp4') no-repeat center center fixed; */
+    background-size: cover;
+    max-width: 100%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 10px #000;
+  }
+
+  
+  .title {
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    color: #e6e6e6;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+  
+  .character {
+    width: 200px;
+    margin: 1rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .character:hover {
+    transform: scale(1.1);
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.7);
+    }
+    100% {
+      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+    }
+  }
+  
+  /* Add any additional styles you need here */
+  

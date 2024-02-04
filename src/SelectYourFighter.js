@@ -6,6 +6,7 @@ import React, { useEffect, useRef } from "react";
 import Phaser from "phaser";
 import { FightScene } from "./FightScene.js";
 import Fighter from "./CharactersJS/Fighter.js";
+import styles from "./SelectYourFighter.module.css";
 
 class SelectFighterScene extends Phaser.Scene {
   init(data) {
@@ -82,7 +83,13 @@ function SelectYourFighter() {
     };
   }, []);
 
-  return <div id="game-container"></div>;
+  return (
+    <>
+      <div id="game-container" className={styles.gameContainer}>
+        <h1 className={styles.title}>Select Your Fighter</h1>
+        {/* Characters should be rendered by Phaser inside this container */}
+      </div>
+    </>
+  );
 }
-
 export default SelectYourFighter;

@@ -1,0 +1,29 @@
+.videoContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1; /* Ensure it stays behind other content */
+    overflow: hidden;
+  }
+  
+  .backgroundVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* This will cover the entire viewport without stretching the video */
+    opacity: 0.5; /* Lowering the opacity to ensure text and other elements are readable */
+  }
+  
+  .videoOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to enhance text visibility */
+  }
+  

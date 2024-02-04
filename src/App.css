@@ -16,51 +16,11 @@
   pointer-events: none;
 }
 
-/* #video-container {
-  position: relative;
-  overflow: hidden;
-} */
-
-#background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.5;
-  z-index: 1;
-}
-
-#video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .6);
-  z-index: 2;
-}
 
 .rasengan{
   position: relative;
   z-index: 5;
 }
-
-.bodyText{
-  font-size: 2rem;
-  font-weight: bold;
-  color: lightblue;
-  text-shadow: 2px 2px 4px #faf8f8;
-  position:absolute;
-  top: 50%;
-  left: 2%;
-  transform: translateY(-50%);
-  z-index: 5;
-}
-
-
-
 
 .App-header {
   background-color: #282c34;
@@ -78,38 +38,7 @@
 }
 
 
-.get-started{
-  margin: auto;
-  display: flex;
-  height: 100vh;
-  width: 100vh;
-  flex-direction: column;
-}
 
-.create-account{
-  color: lightblue;
-  font-size: 2rem;
-  background-color: black;
-  width: 100vh;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 23%;
-  padding-top: 2em;
-}
-
-
-
-.HowToPlay{
-  width: 100vh;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .game{
   background-color: black;
@@ -140,3 +69,7 @@
 .phaser-sprite:hover {
   transform: scale(1.1);
 }
+
+/* ... your existing styles ... */
+
+/* Improve form appearance */

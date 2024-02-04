@@ -1,30 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { Form, InputGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import styles from "./Body.module.css";
 
 function Body() {
+  const navigate = useNavigate();
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const handleClick = (e) => {
+    navigate("/create-account");
+  };
   return (
     <>
-      <div className="bodyText">
-        <h1 className="landText">Shonen Showdown</h1>
-        <b className="bText">
+      <div className={styles.bodyText}>
+        <h1 className={styles.landText}>Shonen Showdown</h1>
+        <p className={styles.bText}>
           Unleash Your Power in the Ultimate Anime Universe
-        </b>
-        {/* <p>
-          Step into the arena of "Shonen Showdown", where the mightiest anime
-          heroes clash in a strategic battle of wits and strength. Gather your
-          squad, harness unique abilities, and challenge your destiny on the
-          path to glory. Are you ready to carve your name in the annals of
-          victory?
-        </p> */}
-        <InputGroup className="inputText" size="lg">
-          <InputGroup.Text id="inputGroup-sizing-lg">Sign-Up</InputGroup.Text>
-          <Form.Control
-            aria-label="Large"
-            aria-describedby="inputGroup-sizing-sm"
-          />
-          <Button variant="outline-light">Play Now</Button>
-        </InputGroup>
+        </p>
+        <Button
+          variant="outline-light"
+          className={styles.playNowButton}
+          onClick={handleClick}
+        >
+          Play Now
+        </Button>
       </div>
     </>
   );

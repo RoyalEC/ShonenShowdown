@@ -1,0 +1,62 @@
+.HowToPlay {
+    color: lightblue;
+    padding: 2rem;
+    text-align: left;
+  }
+  
+  .titleContainer {
+    margin-bottom: 2rem;
+  }
+  
+  .mainTitle {
+    font-size: 3rem;
+    color: #61dafb;
+  }
+  
+  .subtitle {
+    font-size: 2rem;
+    color: #ffffff;
+  }
+  
+  .subtitleDetail {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #cccccc;
+    margin: 0.5rem 0;
+  }
+  
+  .blogImage {
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
+  
+  .paragraph {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cccccc;
+  }
+  
+  .continueButton {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .continueButton:hover {
+    background-color: #e68900;
+  }
+  
+  @media (max-width: 768px) {
+    .mainTitle, .subtitle {
+      font-size: 1.5rem;
+    }
+    .subtitleDetail {
+      font-size: 1.2rem;
+    }
+  }
+  

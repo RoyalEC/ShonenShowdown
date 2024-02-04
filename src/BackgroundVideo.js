@@ -1,12 +1,20 @@
 import React from "react";
+import styles from "./BackgroundVideo.module.css";
 
 function BackgroundVideo() {
   return (
-    <div id="video-container">
-      <video autoPlay loop muted id="background-video">
+    <div className={styles.videoContainer}>
+      <video
+        autoPlay
+        loop
+        muted
+        id="background-video"
+        onError={(e) => console.log("Video error:", e)}
+      >
         <source src="/animemix.mp4" type="video/mp4" />
       </video>
-      <div id="video-overlay"></div>
+
+      <div className={styles.videoOverlay}></div>
     </div>
   );
 }

@@ -1,0 +1,42 @@
+.footer {
+    background-color: #202020;
+    color: #ffffff;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .navItems {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navItem {
+    margin: 0.5rem 0;
+  }
+  
+  .navLink {
+    color: #61dafb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .navLink:hover {
+    text-decoration: underline;
+  }
+  
+  .copyRight {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+  
+  
+  
