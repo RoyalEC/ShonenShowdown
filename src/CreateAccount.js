@@ -17,6 +17,7 @@ function CreateAccount() {
     username: "",
     password: "",
     termsAndConditions: false,
+    isAdmin: false,
   });
 
   const handleChange = (event) => {
@@ -169,6 +170,14 @@ function CreateAccount() {
               onChange={handleChange}
               feedback="You must agree before submitting."
               feedbackType="invalid"
+            />
+          </Form.Group>
+          <Form.Group className={styles.isAdmin}>
+            <Form.Check
+              label="Need Admin Status?"
+              name="isAdmin"
+              checked={formData.isAdmin || false}
+              onChange={handleChange}
             />
           </Form.Group>
           <Button type="submit" className={styles.button}>

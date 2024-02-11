@@ -4,7 +4,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: -1; /* Ensure it stays behind other content */
+    z-index: 0; /* Ensure it stays behind other content */
     overflow: hidden;
   }
   
@@ -24,6 +24,6 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to enhance text visibility */
+    background-color: rgba(0, 0, 0, .8); /* Dark overlay to enhance text visibility */
   }
   

@@ -37,6 +37,42 @@ const userSchema = new mongoose.Schema({
   tokens: [{ token: String }],
 });
 
+const adminSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  termsAndConditions: {
+    type: Boolean,
+    required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    required: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  tokens: [{ token: String }],
+});
+
 // Middleware to hash password before saving
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
@@ -68,6 +104,7 @@ userSchema.statics.findByCredentials = async function (username, password) {
 
 // Compile the schema into a model
 const User = mongoose.model("User", userSchema);
+const Admin = mongoose.model("Admin", adminSchema);
 
 // Connect to MongoDB
 async function main() {

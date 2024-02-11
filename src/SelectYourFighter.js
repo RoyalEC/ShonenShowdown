@@ -46,12 +46,12 @@ class SelectFighterScene extends Phaser.Scene {
       this.scene.start("FightScene", { fighter: "Gojo" });
     });
 
-    const shotoImage = this.add.image(200, 200, "Shoto").setInteractive();
+    const shotoImage = this.add.image(250, 100, "Shoto").setInteractive();
     shotoImage.on("pointerdown", () => {
       this.scene.start("FightScene", { fighter: "Shoto" });
     });
 
-    const itachiImage = this.add.image(300, 300, "itachi").setInteractive();
+    const itachiImage = this.add.image(350, 100, "itachi").setInteractive();
     itachiImage.on("pointerdown", () => {
       this.scene.start("FightScene", { fighter: "Itachi" });
     });
@@ -66,7 +66,7 @@ function SelectYourFighter() {
   useEffect(() => {
     const config = {
       type: Phaser.AUTO,
-      width: 1400,
+      width: 1500,
       height: 700,
       scene: [SelectFighterScene, FightScene],
       physics: {

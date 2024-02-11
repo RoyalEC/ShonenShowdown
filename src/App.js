@@ -7,24 +7,29 @@ import {
   Routes,
   Route,
   ProtectedRoute,
-  Navigate,
+  useNavigate,
 } from "react-router-dom";
 import GetStarted from "./GetStarted.js";
 import HowToPlay from "./HowToPlay.js";
 import PhaserComponent from "./Phaser.js";
 import CreateAccount from "./CreateAccount.js";
 import { NewFightScene } from "./FightScene.js";
+import { useEffect } from "react";
 import SelectYourFighter from "./SelectYourFighter.js";
 import GameComponent from "./GameComponent.js";
 
 function App() {
-  const ProtectedRoute = ({ SelectYourFighter }) => {
-    const isAuthenticated = localStorage.getItem("authToken");
-    if (isAuthenticated) {
-      return <Route path="/select-fighter" element={SelectYourFighter} />;
-    } else {
-      return <Navigate to="/get-started" />;
-    }
+  const ProtectedRoute = ({ children }) => {
+    const isAuthenticated = !!localStorage.getItem("authToken");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      if (!isAuthenticated) {
+        navigate("/get-started");
+      }
+    }, [isAuthenticated, navigate]);
+
+    return isAuthenticated ? children : null;
   };
 
   return (
@@ -38,7 +43,14 @@ function App() {
             <Route path="/create-account" Component={CreateAccount} />
             <Route path="/game" Component={PhaserComponent} />
             <Route path="/fight" Component={NewFightScene} />
-            {ProtectedRoute({ component: SelectYourFighter })}
+            <Route
+              path="/select-fighter"
+              element={
+                <ProtectedRoute>
+                  <SelectYourFighter />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Router>
         {/* <PhaserComponent /> */}
