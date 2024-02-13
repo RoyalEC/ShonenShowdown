@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("./localENV.js");
 const connect = require("./conn.js");
+const { User } = require("./db.js");
 const WebSocket = require("ws");
 
 const PORT = process.env.PORT || 9001;
@@ -12,7 +13,7 @@ const app = express();
 const wss = new WebSocket.Server({ noServer: true });
 app.use(cors("http://localhost:3000"));
 app.use(bodyParser.json());
-express.json();
+app.use(express.json());
 app.use(userRoutes);
 
 app.use("/game", express.static("public"));
@@ -25,6 +26,20 @@ app.get("/", (req, res) => {
 app.get("/get-started", (req, res) =>
   res.json({ message: "Welcome to Shonen Showdown Dude!" })
 );
+
+app.get("/users", async (req, res) => {
+  const users = await User.find({});
+  res.send(users);
+});
+
+app.get("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ error: "Invalid ObjectId" });
+  }
+  const user = await User.findById(id);
+  res.send(user);
+});
 
 app.post("/create-account", (req, res) => {
   console.log(req.body);
@@ -64,6 +79,18 @@ app.post("/users/login", async (req, res) => {
     console.log(e);
     res.status(400).send();
   }
+});
+
+app.delete("/users/:id", async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  res.send({ message: "User deleted" });
+});
+
+app.put("/users/:id", async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  res.send(user);
 });
 
 const server = app.listen(9001, () => {

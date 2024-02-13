@@ -17,6 +17,7 @@ import { NewFightScene } from "./FightScene.js";
 import { useEffect } from "react";
 import SelectYourFighter from "./SelectYourFighter.js";
 import GameComponent from "./GameComponent.js";
+import Admin from "./Admin.js";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/create-account" Component={CreateAccount} />
             <Route path="/game" Component={PhaserComponent} />
             <Route path="/fight" Component={NewFightScene} />
+            <Route path="/admin" Component={Admin} />
             <Route
               path="/select-fighter"
               element={
