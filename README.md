@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Shonen Showdown
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to _Shonen Showdown_, the ultimate 2D fighting game that brings together the mightiest heroes and villains from the Shonen universe. Experience the thrill of battle in beautifully crafted 2D arenas, showcasing your favorite characters in a clash of epic proportions. With fluid animations, strategic gameplay, and an homage to the classic Shonen spirit, _Shonen Showdown_ is a must-play for fans and fighters alike.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Game Overview](#game-overview)
+- [How to Play](#how-to-play)
+- [Upcoming Features](#upcoming-features)
+- [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
 
-### `npm start`
+## Game Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+_Shonen Showdown_ encapsulates the essence of Shonen anime, transforming intense narratives and iconic abilities into a competitive fighting game format. Players select from a roster of characters, each boasting unique abilities and special moves inspired by their anime counterparts, to compete in dynamic 2D environments. The game emphasizes skill, strategy, and the profound connections between characters and their stories.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How to Play
 
-### `npm test`
+### Controls
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The game features intuitive controls that are easy to learn but challenging to master:
 
-### `npm run build`
+- **Movement**: Use the arrow keys for character movement.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Players are encouraged to experiment with different characters to find a playstyle that suits them best, combining basic and special moves to create powerful combos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Upcoming Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We plan on adding more features in the future such as more game modes, more characters and eventually maybe a multiplayer.
 
-### `npm run eject`
+## Contributing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+_Shonen Showdown_ is a community-driven project, and we welcome contributions from fans and developers alike. Whether you're interested in contributing to the game's development, providing feedback, or suggesting new features, we'd love to hear from you. Please reach out to us via [our community forum/our contact email] for more information on how you can contribute.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgments
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+A heartfelt thank you to the anime community and the creators of the Shonen series that inspired this game. Your creativity and passion fuel our dedication to making _Shonen Showdown_ the best it can be.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Thank you for your interest in _Shonen Showdown_. Stay tuned for more updates and get ready to unleash your inner fighter!
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For the latest news and updates, follow us on [our official website]().
