@@ -6,6 +6,19 @@
 .pnp.js
 .env
 
+# Visual Studio
+.vs/
+**/.vs/
+*.user
+*.suo
+*.rsuser
+
+# .NET build output
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
 # testing
 /coverage
 

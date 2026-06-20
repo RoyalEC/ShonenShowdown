@@ -1,0 +1,8 @@
+@ShonenShowdown.GameApi_HostAddress = http://localhost:5133
+
+GET {{ShonenShowdown.GameApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+
+
+###
