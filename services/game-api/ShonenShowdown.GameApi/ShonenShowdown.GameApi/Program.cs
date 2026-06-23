@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using ShonenShowdown.GameApi.DataAccess;
+using ShonenShowdown.GameApi.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +12,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHealthChecks();
+builder.Services.AddDbContext<GameApiDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IProfileRepository, SqlProfileRepository>();
+builder.Services.AddScoped<IFighterRepository, SqlFighterRepository>();
+
+//builder.Services.AddSingleton<IProfileRepository, InMemoryProfileRepository>();
 
 var app = builder.Build();
 
